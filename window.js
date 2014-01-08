@@ -23,7 +23,9 @@ function updateLocationValues(location, propertyName){
 
     location.origin = location.protocol + '//' + host;
 
-    location.href = location.origin + location.pathname;
+    location.path = location.pathname + location.search + location.hash;
+
+    location.href = location.origin + location.path;
 
     delete location._updating;
 }
@@ -41,6 +43,9 @@ function Location(window){
                     return propValue || '';
                 },
                 set: function(value){
+                    if(prop === 'href'){
+                        value = url.resolve(location.href, value);
+                    }
                     propValue = value;
                     updateLocationValues(location, prop);
                     if(prop === 'hash'){

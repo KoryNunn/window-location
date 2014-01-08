@@ -43,6 +43,18 @@ grape('set pathname resolves to url', function(t){
 
     win.location.pathname = '/stuff';
 
+    t.equal(win.location.toString(), urlParts.protocol + '//' + urlParts.host + '/stuff' + urlParts.search + urlParts.hash);
+});
+
+grape('set pathname style href resolves to url', function(t){
+    t.plan(1);
+
+    var win = new Window();
+
+    win.location = testUrl;
+
+    win.location.href = '/stuff';
+
     t.equal(win.location.toString(), urlParts.protocol + '//' + urlParts.host + '/stuff');
 });
 
