@@ -1,7 +1,8 @@
 var grape = require('grape'),
     Window = require('../window'),
     url = require('url'),
-    testUrl = 'http://localhost:8080/things/0/stuff/0?whatsits=1#majiggers';
+    testUrl = 'http://localhost:8080/things/0/stuff/0?whatsits=1#majiggers',
+    urlParts = url.parse(testUrl);
 
 grape('set location', function(t){
     t.plan(1);
@@ -18,9 +19,9 @@ grape('set location from pathname', function(t){
 
     var win = new Window();
 
-    win.location = url.parse(testUrl).pathname;
+    win.location = urlParts.pathname;
 
-    t.equal(win.location.toString(), url.parse(testUrl).pathname);
+    t.equal(win.location.toString(), urlParts.pathname);
 });
 
 grape('pathname sets', function(t){
@@ -30,7 +31,19 @@ grape('pathname sets', function(t){
 
     win.location = testUrl;
 
-    t.equal(win.location.pathname, url.parse(testUrl).pathname);
+    t.equal(win.location.pathname, urlParts.pathname);
+});
+
+grape('set pathname resolves to url', function(t){
+    t.plan(1);
+
+    var win = new Window();
+
+    win.location = testUrl;
+
+    win.location.pathname = '/stuff';
+
+    t.equal(win.location.toString(), urlParts.protocol + '//' + urlParts.host + '/stuff');
 });
 
 grape('get pathname from pathname', function(t){
@@ -40,7 +53,7 @@ grape('get pathname from pathname', function(t){
 
     win.location = url.parse(testUrl).pathname;
 
-    t.equal(win.location.pathname, url.parse(testUrl).pathname);
+    t.equal(win.location.pathname, urlParts.pathname);
 });
 
 grape('get port', function(t){
@@ -50,7 +63,7 @@ grape('get port', function(t){
 
     win.location = testUrl;
 
-    t.equal(win.location.port, url.parse(testUrl).port);
+    t.equal(win.location.port, urlParts.port);
 });
 
 grape('get protocol', function(t){
@@ -60,7 +73,7 @@ grape('get protocol', function(t){
 
     win.location = testUrl;
 
-    t.equal(win.location.protocol, url.parse(testUrl).protocol);
+    t.equal(win.location.protocol, urlParts.protocol);
 });
 
 grape('get hostname', function(t){
@@ -70,7 +83,7 @@ grape('get hostname', function(t){
 
     win.location = testUrl;
 
-    t.equal(win.location.hostname, url.parse(testUrl).hostname);
+    t.equal(win.location.hostname, urlParts.hostname);
 });
 
 grape('get search', function(t){
@@ -80,7 +93,7 @@ grape('get search', function(t){
 
     win.location = testUrl;
 
-    t.equal(win.location.search, url.parse(testUrl).search);
+    t.equal(win.location.search, urlParts.search);
 });
 
 grape('get hash', function(t){
@@ -90,7 +103,7 @@ grape('get hash', function(t){
 
     win.location = testUrl;
 
-    t.equal(win.location.hash, url.parse(testUrl).hash);
+    t.equal(win.location.hash, urlParts.hash);
 });
 
 grape('onhashchange', function(t){

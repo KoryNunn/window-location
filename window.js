@@ -14,17 +14,18 @@ function updateLocationValues(location, propertyName){
                     location[key] = locationParts[key];
                 }
             }
-            return;
         }
+        delete location._updating;
+        return;
     }
 
     var host = location.hostname + (location.port ? ':' + location.port : '');
 
-    var origin = location.protocol + '//' + host;
+    location.origin = location.protocol + '//' + host;
+
+    location.href = location.origin + location.pathname;
 
     delete location._updating;
-
-    location.href = origin + location.pathname
 }
 
 var locationProperties = ['host', 'hostname', 'href', 'origin', 'pathname', 'port', 'protocol', 'search', 'hash'];
