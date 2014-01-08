@@ -1,13 +1,13 @@
 {
-  "name": "node-window",
+  "name": "window-location",
   "version": "0.0.0",
-  "description": "",
+  "description": "a window.location mock for testing in node",
   "main": "window.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./test/test.js"
   },
   "author": "",
   "license": "BSD",
