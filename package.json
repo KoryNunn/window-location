@@ -1,6 +1,6 @@
 {
   "name": "window-location",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "a window.location mock for testing in node",
   "main": "window.js",
   "directories": {
