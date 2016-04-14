@@ -13,5 +13,14 @@
   "license": "BSD",
   "devDependencies": {
     "grape": "~0.1.7"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KoryNunn/window-location.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/KoryNunn/window-location/issues"
+  },
+  "homepage": "https://github.com/KoryNunn/window-location#readme"
 }
